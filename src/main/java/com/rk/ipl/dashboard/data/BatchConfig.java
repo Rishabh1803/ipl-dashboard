@@ -1,6 +1,7 @@
 package com.rk.ipl.dashboard.data;
 
 import com.rk.ipl.dashboard.model.Match;
+import com.rk.ipl.dashboard.model.MatchInput;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.job.builder.JobBuilder;

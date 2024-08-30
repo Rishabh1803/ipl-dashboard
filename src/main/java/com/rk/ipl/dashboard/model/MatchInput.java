@@ -1,4 +1,4 @@
-package com.rk.ipl.dashboard.data;
+package com.rk.ipl.dashboard.model;
 
 import lombok.Getter;
 import lombok.Setter;
