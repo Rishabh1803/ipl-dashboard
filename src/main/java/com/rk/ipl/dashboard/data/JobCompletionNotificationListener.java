@@ -1,7 +1,6 @@
 package com.rk.ipl.dashboard.data;
 
 
-import com.rk.ipl.dashboard.model.Match;
 import com.rk.ipl.dashboard.model.Team;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
@@ -9,11 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
-import org.springframework.jdbc.core.DataClassRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
