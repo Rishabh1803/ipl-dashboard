@@ -10,6 +10,7 @@ import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -28,22 +29,18 @@ public class JobCompletionNotificationListener implements JobExecutionListener {
     public void afterJob(JobExecution jobExecution) {
         if(jobExecution.getStatus() == BatchStatus.COMPLETED) {
             log.info("!!! JOB FINISHED! Time to verify the results");
-
             getTeamData().values().forEach(em::persist);
-
         }
     }
 
     public Map<String, Team> getTeamData() {
 
 //        Generate initial team data
-        Map<String, Team> teamData = em.createQuery("select distinct m.team1, count(*) from Match m group by m.team1", Object[].class)
+        Map<String, Team> teamData = new HashMap<>();
+        em.createQuery("select distinct m.team1, count(*) from Match m group by m.team1", Object[].class)
                 .getResultStream()
                 .map(element -> new Team( (String) element[0], (Long) element[1]))
-                .collect(Collectors.toMap(
-                        Team::getTeamName,
-                        e -> e
-                ));
+                .forEach(team -> teamData.put(team.getTeamName(), team));
 
 //        Add total matches data for each team
         em.createQuery("select distinct m.team2, count(*) from Match m group by m.team2", Object[].class)
